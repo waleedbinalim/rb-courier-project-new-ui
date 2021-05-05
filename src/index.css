@@ -1,0 +1,122 @@
+
+
+body {
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+
+img{
+  max-width: 100%;
+}
+
+.orders-image-wrapper{
+  position: relative;
+  background-image: url('https://images.pexels.com/photos/1797428/pexels-photo-1797428.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940');
+  background-size: cover;
+  background-repeat: no-repeat;
+  min-height: 500px;
+  margin-bottom:  20px;
+  border-radius: 20px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+}
+.orders-image-wrapper::before{
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 20px;
+  z-index: -1;
+}
+
+.home-image-wrapper{
+  position: relative;
+  background-image: url('https://images.pexels.com/photos/4604599/pexels-photo-4604599.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500');
+  background-size: cover;
+  background-repeat: no-repeat;
+  min-height: 500px;
+  margin-bottom:  20px;
+  border-radius: 20px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+}
+.home-image-wrapper::before{
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 20px;
+  z-index: -1;
+}
+
+.users-image-wrapper{
+  position: relative;
+  background-image: url('https://images.pexels.com/photos/9816/pexels-photo-9816.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260');
+  background-size: cover;
+  background-repeat: no-repeat;
+  min-height: 500px;
+  margin-bottom:  20px;
+  border-radius: 20px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+}
+.users-image-wrapper::before{
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 20px;
+  z-index: -1;
+}
+
+.form-card{
+  border-radius: 20px;
+  padding: 24px 16px;
+  border: solid 2px #d6d6d6;
+  margin-top: 24px;
+}
+
+.heading{
+  color: #5b5b5bff;
+  font-weight: 600;
+}
+
+.form--inner{
+  max-width: 760px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.home-text-image{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border-radius: 20px;
+}
