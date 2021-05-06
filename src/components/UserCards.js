@@ -38,7 +38,7 @@ export default function UserCards({filteredUsers, handleDelete, handleEdit}) {
     return (
         <div>
             <Grid align="center" item xs={12} sm={12} md={12}>
-                <a className={classes.linkText} href="http://localhost:3000/create/user">
+                <a className={classes.linkText} href="/create/user">
                     <Button variant="contained" size="large" color="secondary">Create User</Button>    
                 </a>
             </Grid>

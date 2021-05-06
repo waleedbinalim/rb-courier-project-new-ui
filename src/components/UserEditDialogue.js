@@ -28,7 +28,6 @@ export default function SimpleDialogDemo({openEditModal , setOpenEditModal , edi
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-        console.log(editUserValue)
         let url = '/users/' + editUserValue._id
         let data = JSON.stringify(editUserValue)
         await api.put( url , data , {headers: headers})

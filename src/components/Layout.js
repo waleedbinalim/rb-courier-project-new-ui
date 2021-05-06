@@ -21,7 +21,6 @@ const useStyles = makeStyles((theme) => {
     return{
       toolbar: theme.mixins.toolbar,
       page: {
-        //   background: '#f9f9f9',
           width: '100%',
           minHeight: '100vh',
           paddingTop: theme.spacing(5)
@@ -38,7 +37,6 @@ const useStyles = makeStyles((theme) => {
       },
       drawerPaper:{
         width: '100%',
-        // textAlign: 'center'
       },
       footer: {
           background: '#3f51b5',
@@ -91,7 +89,6 @@ export default function Layout({children}) {
                     <ListItemIcon>
                         <ArrowBackIcon/>
                     </ListItemIcon>
-                    {/* <ListItemText primary="BACK"/> */}
                 </ListItem>
                 <List>
                     {menuItems.map(item => {
@@ -100,7 +97,6 @@ export default function Layout({children}) {
                                 <ListItem className={classes.drawer}  button key={item.title} onClick={() => drawerLink(item.path) }>
                                     <ListItemText primary={item.title} />
                                 </ListItem>
-                                {/* <Divider/> */}
                             </>
                         )
                     })}
@@ -113,9 +109,7 @@ export default function Layout({children}) {
                     {children}
                 </div>
             </Container>
-
             <br/>
-            
             <BottomNavigation className={classes.footer}>
                 <Typography className={classes.footerText}>&copy;2021, CourierServices.pk</Typography>
             </BottomNavigation>

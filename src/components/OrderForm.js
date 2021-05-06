@@ -32,12 +32,10 @@ export default function OrderForm() {
 
     let handleSubmit = async (e) => {
         e.preventDefault();
-        console.log(inputField)
         if(inputField.deliveredTo && inputField.deliveredBy){
             let data = JSON.stringify(inputField)
             await api.post('/orders/add', data , {headers: headers})
             let addedUser = await api.get('orders/all')
-            console.log(addedUser.data)
             history.push('/orders')
         }
     }

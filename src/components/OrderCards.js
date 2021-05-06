@@ -1,10 +1,6 @@
 import React from 'react'
 import { Card, CardHeader, CardContent, Typography, Grid, CardActions, Button } from '@material-ui/core'
 import {makeStyles } from '@material-ui/core'
-// import { IconButton} from '@material-ui/core'
-// import { DeleteOutlined } from '@material-ui/icons'
-
-//  COLOR = #5b5b5bff
 
 const useStyles = makeStyles((theme) => {
     return{
@@ -61,7 +57,7 @@ export default function UserCards({filteredOrders , handleDelete , handleEdit}) 
     return (
         <div>
             <Grid align="center" item xs={12} sm={12} md={12}>
-                <a className={classes.linkText} href="http://localhost:3000/create/order">
+                <a className={classes.linkText} href="/create/order">
                     <Button variant="contained" size="large" color="secondary">Create Order</Button>    
                 </a>
             </Grid>
