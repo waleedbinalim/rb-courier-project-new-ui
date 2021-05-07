@@ -45,9 +45,7 @@ export default function UserCards({filteredUsers, handleDelete, handleEdit}) {
             <Grid className={classes.cardContainer} container spacing={3}>
                 {
                     filteredUsers.map(user => {
-                        if(user.isActive 
-                            // || user.isActive == false
-                            ){
+                        if(user.isActive){
                             return(  
                                 <Grid key={user._id} item xs={12} sm={6} md={4}>
                                     <Card elevation={10} className={classes.card}>
