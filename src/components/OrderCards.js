@@ -11,7 +11,7 @@ const useStyles = makeStyles((theme) => {
         },
         card: {
             padding: 18,
-            borderRadius: 18
+            borderRadius: 18,
         },
         cardContent:{
             marginBottom: 8
@@ -26,15 +26,22 @@ const useStyles = makeStyles((theme) => {
             color: '#fff',
             borderRadius: 20,
             textTransform: 'capitalize',
-            fontSize: 12
+            fontSize: 12,
+            [theme.breakpoints.down('md')]: {
+                marginTop: 16
+              },
         },
         spanDiv: {
             display: 'flex',
             alignItems: 'center',
-            justifyContent: 'space-between'
+            justifyContent: 'space-between',
+            [theme.breakpoints.down('md')]: {
+                flexDirection: 'column',
+                alignItems: 'flex-start'
+              },
         },
         spanId: {
-            fontSize: 14,
+            fontSize: 12,
             fontWeight: 600,
             color: '#5b5b5bff'
         },
@@ -63,43 +70,46 @@ export default function UserCards({filteredOrders , handleDelete , handleEdit}) 
             </Grid>
             <Grid className={classes.cardContainer} container spacing={3}>
                 {filteredOrders.map(order => {
-                    return(
+                    if(order.isActive){
+                        return(
                         
-                        <Grid key={order._id} item xs={12} sm={6} md={4}>
-                            <Card className={classes.card} elevation={5}>
-                                <CardHeader 
-                                        title={
-                                            <div className={classes.spanDiv}>
-                                                <span className={classes.spanId}>ID: {order._id}</span>
-                                                <span className={classes.spanTag}>{order.status}</span>
-                                            </div>
-                                        }
-                                    />
-        
-                                <CardContent>
-                                    <Typography className={classes.cardContent}><strong>Delivery To:</strong> {order.deliveredTo}</Typography>
-                                    <Typography className={classes.cardContent}><strong>Delivery By:</strong> {order.deliveredBy}</Typography>
-                                    <Typography><strong>Is Active:</strong> {order.isActive ? 'Yes' : 'No'}</Typography>
-                                </CardContent>
+                            <Grid key={order._id} item xs={12} sm={6} md={4}>
+                                <Card className={classes.card} elevation={5}>
+                                    <CardHeader 
+                                            title={
+                                                <div className={classes.spanDiv}>
+                                                    <span className={classes.spanId}>ID: {order._id}</span>
+                                                    <span className={classes.spanTag}>{order.status}</span>
+                                                </div>
+                                            }
+                                        />
+            
+                                    <CardContent>
+                                        <Typography className={classes.cardContent}><strong>Delivery To:</strong> {order.deliveredTo}</Typography>
+                                        <Typography className={classes.cardContent}><strong>Delivery By:</strong> {order.deliveredBy}</Typography>
+                                        <Typography><strong>Is Active:</strong> {order.isActive ? 'Yes' : 'No'}</Typography>
+                                    </CardContent>
+    
+                                    <CardActions>
+                                        <Button id={order._id} variant="contained" size="small" color="primary"
+                                            onClick={(e) => {handleEdit(e)}}
+                                        >
+                                        EDIT
+                                        </Button>
+                                        <Button id={order._id} variant="contained" size="small" color="secondary"
+                                            onClick={(e) => {handleDelete(e)}}
+                                        >
+                                                DELETE
+                                        </Button>
+                                    </CardActions>
+    
+    
+                                </Card>
+                            </Grid>
+    
+                        )
+                    }
 
-                                <CardActions>
-                                    <Button id={order._id} variant="contained" size="small" color="primary"
-                                        onClick={(e) => {handleEdit(e)}}
-                                    >
-                                    EDIT
-                                    </Button>
-                                    <Button id={order._id} variant="contained" size="small" color="secondary"
-                                        onClick={(e) => {handleDelete(e)}}
-                                    >
-                                            DELETE
-                                    </Button>
-                                </CardActions>
-
-
-                            </Card>
-                        </Grid>
-
-                    )
                 })}
             </Grid>
         </div>

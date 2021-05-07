@@ -54,7 +54,6 @@ export default function Users() {
         let filter = users.filter(user => {
             return user.name.toLowerCase().includes(userSearch.toLowerCase())   
         })
-        // console.log(filter)
         setFilteredUsers(filter)
     },[userSearch])
 
@@ -64,7 +63,7 @@ export default function Users() {
 
     let handleDelete= async (e) => {
         let deleteURL = `/users/${e.currentTarget.id}`;
-        await api.put(deleteURL , {isActive: true} , {headers: headers})
+        await api.put(deleteURL , {isActive: false} , {headers: headers})
         let updatedUsers = await api.get('/users/all')
         setFilteredUsers(updatedUsers.data)
         setUsers(updatedUsers.data)

@@ -111,7 +111,7 @@ export default function Layout({children}) {
             </Container>
             <br/>
             <BottomNavigation className={classes.footer}>
-                <Typography className={classes.footerText}>&copy;2021, CourierServices.pk</Typography>
+                <Typography className={classes.footerText}>&copy;2021, pakourier.pk</Typography>
             </BottomNavigation>
         </div>
     )

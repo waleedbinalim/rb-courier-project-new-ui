@@ -35,7 +35,24 @@ const api = axios.create({baseURL: 'http://localhost:5000/'})
                 marginLeft: 'auto',
                 marginRight: 'auto',
                 padding: 20
-            }
+            },
+            ordersHeading:{
+                color: '#fff',
+                fontWeight: 600,
+                fontSize: 60,
+                lineHeight: '68px',
+                textAlign: 'center',
+                marginBottom: '8px',
+                [theme.breakpoints.down('sm')]: {
+                    fontSize: 48,
+                    lineHeight: '56px'
+                  },
+                [theme.breakpoints.down('xs')]: {
+                    fontSize: 36,
+                    lineHeight: '42px'
+                  },
+    
+            },
      }
  })
 
@@ -88,7 +105,7 @@ export default function Orders() {
             <OrderEditDialogue openEditModal={openEditModal} setOpenEditModal={setOpenEditModal} editOrderValue={editOrderValue} setEditOrderValue={setEditOrderValue} setOrders={setOrders} setFilteredOrders={setFilteredOrders}/>
             <div className="orders-image-wrapper">
             <div className={classes.ordersText}>
-                <Typography variant="h3" className={classes.text}>Track Your Order</Typography>
+                <Typography variant="h3" className={classes.ordersHeading}>Track Your Order</Typography>
                 <Typography variant="p" className={classes.text}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum ipsam ducimus cupiditate magni esse delectus repellat eveniet praesentium quasi veritatis? Quis hic dolor, reiciendis impedit nam id beatae voluptas ad, non, libero voluptate eos?</Typography>
                 <TextField
                     // id="outlined-secondary"

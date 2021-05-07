@@ -1,7 +1,7 @@
 import React from "react";
 import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
-import {makeStyles} from "@material-ui/core";
+import {makeStyles, TextField} from "@material-ui/core";
 import axios from 'axios'
 
 let headers = { 'Content-Type': 'application/json;charset=UTF-8', "Access-Control-Allow-Origin": "*"}
@@ -13,10 +13,10 @@ const useStyles = makeStyles((theme) => {
             padding: 24
         },
         fields:{
-            margin: 12,
+            margin: '12px 0px',
             display: 'block',
             padding: 16
-        }
+        },
     }
 })
 
