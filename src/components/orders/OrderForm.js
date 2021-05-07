@@ -2,11 +2,7 @@ import React, {useState} from 'react'
 import { TextField, Button } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core'
 import { useHistory } from "react-router-dom";
-import axios from 'axios'
-
-const api = axios.create({ baseURL: 'http://localhost:5000/'})
-
-let headers = {'Content-Type': 'application/json;charset=UTF-8',"Access-Control-Allow-Origin": "*"}
+import {headers ,api} from '../../api/Api'
 
 let useStyles = makeStyles((theme) => {
     return{
