@@ -47,6 +47,7 @@ const useStyles = makeStyles((theme) => {
                 lineHeight: '32px'
               },
         },
+        
         welcomeHeading:{
             color: '#fff',
             fontWeight: 600,
