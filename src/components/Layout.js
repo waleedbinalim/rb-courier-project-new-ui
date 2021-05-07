@@ -4,17 +4,7 @@ import Appbar from './Appbar'
 import {makeStyles, Container, BottomNavigation, Typography, Drawer, List, ListItem, ListItemText} from '@material-ui/core'
 import {ListItemIcon} from '@material-ui/core'
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
-
-
-const menuItems = [
-    {title: 'HOME' , path: '/'},
-    {title: 'USERS' , path: '/users'},
-    {title: 'ORDERS' , path: '/orders'},
-    {title: 'ABOUT' , path: '/about'},
-    {title: 'CONTACT' , path: '/contact'},
-    {title: 'LOGIN' , path: '/'},
-    {title: 'SIGN UP' , path: '/'},
-]
+import {menuItems} from '../constants/Constants'
 
 
 const useStyles = makeStyles((theme) => {

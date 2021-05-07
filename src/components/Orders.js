@@ -3,10 +3,8 @@ import {TextField, Typography} from '@material-ui/core'
 import {makeStyles} from '@material-ui/core'
 import OrderCards from './orders/OrderCards'
 import OrderEditDialogue from './orders/OrderEditDialogue'
-import axios from 'axios'
+import {headers , api} from '../api/Api'
 
-let headers = {'Content-Type': 'application/json;charset=UTF-8',"Access-Control-Allow-Origin": "*"}
-const api = axios.create({baseURL: 'http://localhost:5000/'})
 
  let useStyles = makeStyles((theme) => {
      return{    

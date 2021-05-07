@@ -3,11 +3,7 @@ import UserCards from '../components/users/UserCards'
 import UserEditDialogue from '../components/users/UserEditDialogue'
 import { Grid, Typography, TextField } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core'
-import axios from 'axios'
-
-let headers = {'Content-Type': 'application/json;charset=UTF-8',"Access-Control-Allow-Origin": "*"}
-const api = axios.create({baseURL: 'http://localhost:5000/'})
-
+import {headers , api} from '../api/Api'
 
 const useStyles = makeStyles((theme) => {
     return{
@@ -97,7 +93,6 @@ export default function Users() {
                 </Grid>
             </Grid>
             <UserCards filteredUsers={filteredUsers} handleDelete={handleDelete} handleEdit={handleEdit}/>
-
         </div>
     )
 }

@@ -1,6 +1,7 @@
 import React from 'react'
 import { TextField, Button } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core'
+import {contactInputs} from '../constants/Constants'
 
 let useStyles = makeStyles((theme) => {
     return{
@@ -16,12 +17,6 @@ let useStyles = makeStyles((theme) => {
 
     }
 })
-
-const contactInputs = [
-    {label: 'First Name'},
-    {label: 'Last Name'},
-    {label: 'Email'}
-]
 
 
 export default function UserForm() {
