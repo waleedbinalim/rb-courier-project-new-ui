@@ -1,8 +1,8 @@
 import React, {useState , useEffect} from 'react'
 import {TextField, Typography} from '@material-ui/core'
 import {makeStyles} from '@material-ui/core'
-import OrderCards from '../components/OrderCards'
-import OrderEditDialogue from '../components/OrderEditDialogue'
+import OrderCards from './orders/OrderCards'
+import OrderEditDialogue from './orders/OrderEditDialogue'
 import axios from 'axios'
 
 let headers = {'Content-Type': 'application/json;charset=UTF-8',"Access-Control-Allow-Origin": "*"}
@@ -108,7 +108,6 @@ export default function Orders() {
                 <Typography variant="h3" className={classes.ordersHeading}>Track Your Order</Typography>
                 <Typography variant="p" className={classes.text}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum ipsam ducimus cupiditate magni esse delectus repellat eveniet praesentium quasi veritatis? Quis hic dolor, reiciendis impedit nam id beatae voluptas ad, non, libero voluptate eos?</Typography>
                 <TextField
-                    // id="outlined-secondary"
                     className={classes.searchField}
                     label="Enter Id"
                     variant="filled"

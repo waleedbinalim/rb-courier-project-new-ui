@@ -1,5 +1,5 @@
 import React from 'react'
-import OrderForm from '../components/OrderForm'
+import OrderForm from '../components/orders/OrderForm'
 import { Typography, makeStyles } from '@material-ui/core'
 
 let useStyles = makeStyles((theme) => {

@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react'
-import UserCards from '../components/UserCards'
-import UserEditDialogue from '../components/UserEditDialogue'
+import UserCards from '../components/users/UserCards'
+import UserEditDialogue from '../components/users/UserEditDialogue'
 import { Grid, Typography, TextField } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core'
 import axios from 'axios'
