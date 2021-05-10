@@ -1,9 +1,10 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect , useContext} from 'react'
 import UserCards from '../components/users/UserCards'
 import UserEditDialogue from '../components/users/UserEditDialogue'
 import { Grid, Typography, TextField } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core'
 import {headers , api} from '../api/Api'
+import {UserContext} from '../state/users/UserContext'
 
 const useStyles = makeStyles((theme) => {
     return{
@@ -31,11 +32,8 @@ const useStyles = makeStyles((theme) => {
 
 export default function Users() {
     const classes = useStyles()
-    let [filteredUsers,setFilteredUsers] = useState([])
-    let [users,setUsers] = useState([])
-    let [userSearch , setUserSearch] = useState('')
-    let [openEditModal , setOpenEditModal] = useState(false)
-    let [editUserValue , setEditUserValue] = useState({name: 'blank', email: 'blank', city: 'blank', address: 'blank', phone: 'blank', })
+    const {filteredUsers, setFilteredUsers , users , setUsers , userSearch , setUserSearch,
+        openEditModal , setOpenEditModal , editUserValue , setEditUserValue} = useContext(UserContext)
 
     useEffect( ()=> {
         fetch('http://localhost:5000/users/all')
@@ -75,7 +73,7 @@ export default function Users() {
 
     return (
         <div>
-            <UserEditDialogue editUserValue={editUserValue} setEditUserValue={setEditUserValue} openEditModal={openEditModal} setOpenEditModal={setOpenEditModal} setUsers={setUsers} setFilteredUsers={setFilteredUsers}/>
+            <UserEditDialogue/>
             <Grid container>
                 <Grid className={classes.userPageImage} item md={12}>
                     <div className="users-image-wrapper">
@@ -92,7 +90,11 @@ export default function Users() {
                     </div>
                 </Grid>
             </Grid>
-            <UserCards filteredUsers={filteredUsers} handleDelete={handleDelete} handleEdit={handleEdit}/>
+            <UserCards 
+                filteredUsers={filteredUsers} 
+                handleDelete={handleDelete} 
+                handleEdit={handleEdit}
+            />
         </div>
     )
 }

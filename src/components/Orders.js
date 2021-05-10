@@ -1,9 +1,10 @@
-import React, {useState , useEffect} from 'react'
+import React, {useState , useEffect, useContext} from 'react'
 import {TextField, Typography} from '@material-ui/core'
 import {makeStyles} from '@material-ui/core'
 import OrderCards from './orders/OrderCards'
 import OrderEditDialogue from './orders/OrderEditDialogue'
 import {headers , api} from '../api/Api'
+import {OrderContext} from '../state/orders/OrderContext'
 
 
  let useStyles = makeStyles((theme) => {
@@ -56,11 +57,8 @@ import {headers , api} from '../api/Api'
 
 export default function Orders() {
     const classes = useStyles()
-    let [filteredOrders, setFilteredOrders] = useState([])
-    let [orders, setOrders] = useState([])
-    let [orderSearch, setOrderSearch] = useState('')
-    let [openEditModal , setOpenEditModal] = useState(false)
-    let [editOrderValue , setEditOrderValue] = useState({deliveredTo: '', deliveredBy: ''})
+    const {filteredOrders , setFilteredOrders , orders , setOrders , orderSearch , setOrderSearch,
+    openEditModal, setOpenEditModal , editOrderValue , setEditOrderValue} = useContext(OrderContext)
 
 
     useEffect(() => {
@@ -100,7 +98,7 @@ export default function Orders() {
 
     return (
         <div>
-            <OrderEditDialogue openEditModal={openEditModal} setOpenEditModal={setOpenEditModal} editOrderValue={editOrderValue} setEditOrderValue={setEditOrderValue} setOrders={setOrders} setFilteredOrders={setFilteredOrders}/>
+            <OrderEditDialogue/>
             <div className="orders-image-wrapper">
             <div className={classes.ordersText}>
                 <Typography variant="h3" className={classes.ordersHeading}>Track Your Order</Typography>

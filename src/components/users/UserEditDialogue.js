@@ -1,8 +1,9 @@
-import React from "react";
+import React, {useContext} from "react";
 import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
 import {makeStyles} from "@material-ui/core";
 import {headers ,api} from '../../api/Api'
+import {UserContext} from '../../state/users/UserContext'
 
 const useStyles = makeStyles((theme) => {
     return{
@@ -17,8 +18,11 @@ const useStyles = makeStyles((theme) => {
     }
 })
 
-export default function SimpleDialogDemo({openEditModal , setOpenEditModal , editUserValue , setEditUserValue , setUsers , setFilteredUsers}) {
+export default function SimpleDialogDemo() {
+    const {setFilteredUsers , setUsers, openEditModal , setOpenEditModal , editUserValue , setEditUserValue} = useContext(UserContext)
     const classes = useStyles();
+
+    
     const handleClose = () => {
         setOpenEditModal(false);
     };

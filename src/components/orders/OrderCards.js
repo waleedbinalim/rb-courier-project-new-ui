@@ -1,6 +1,7 @@
-import React from 'react'
+import React , {useContext} from 'react'
 import { Card, CardHeader, CardContent, Typography, Grid, CardActions, Button } from '@material-ui/core'
 import {makeStyles } from '@material-ui/core'
+import {OrderContext} from '../../state/orders/OrderContext'
 
 const useStyles = makeStyles((theme) => {
     return{
@@ -63,7 +64,8 @@ const useStyles = makeStyles((theme) => {
 })
 
 
-export default function UserCards({filteredOrders , handleDelete , handleEdit}) {
+export default function UserCards({handleDelete , handleEdit}) {
+    const {filteredOrders} = useContext(OrderContext)
     const classes = useStyles()
     return (
         <div>
@@ -106,14 +108,10 @@ export default function UserCards({filteredOrders , handleDelete , handleEdit}) 
                                                 DELETE
                                         </Button>
                                     </CardActions>
-    
-    
                                 </Card>
                             </Grid>
-    
                         )
                     }
-
                 })}
             </Grid>
         </div>

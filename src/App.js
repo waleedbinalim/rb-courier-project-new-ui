@@ -7,6 +7,8 @@ import Contact from './pages/Contact'
 import CreateUser from './pages/CreateUser'
 import CreateOrder from './pages/CreateOrder'
 import Layout from './components/Layout'
+import UserContextProvider from './state/users/UserContext'
+import OrderContextProvider from './state/orders/OrderContext'
 
 
 function App() {
@@ -16,8 +18,13 @@ function App() {
           <Layout>
             <Route exact path='/' component={Home} />
             <Route exact path='/about' component={About} />
-            <Route exact path='/users' component={Users} />
-            <Route exact path='/orders' component={Orders} />
+
+            <UserContextProvider>
+              <Route exact path='/users' component={Users} />
+            </UserContextProvider>
+            <OrderContextProvider>
+              <Route exact path='/orders' component={Orders} />
+            </OrderContextProvider>
             <Route exact path='/contact' component={Contact} />
             <Route exact path='/create/user' component={CreateUser} />
             <Route exact path='/create/order' component={CreateOrder} />

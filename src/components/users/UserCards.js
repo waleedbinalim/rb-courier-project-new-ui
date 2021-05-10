@@ -1,7 +1,8 @@
-import React from 'react'
+import React, {useContext} from 'react'
 import { Card, CardHeader, CardContent, Typography, Grid, CardActions, Button, Avatar } from '@material-ui/core'
 import { blue } from '@material-ui/core/colors'
 import { makeStyles } from '@material-ui/core'
+import {UserContext} from '../../state/users/UserContext'
 
 
 const useStyles = makeStyles((theme) => {
@@ -31,8 +32,9 @@ const useStyles = makeStyles((theme) => {
     }
 })
 
-export default function UserCards({filteredUsers, handleDelete, handleEdit}) {
+export default function UserCards({handleDelete, handleEdit}) {
     const classes = useStyles();
+    const {filteredUsers} = useContext(UserContext)
 
 
     return (
