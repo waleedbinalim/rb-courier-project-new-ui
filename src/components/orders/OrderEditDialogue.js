@@ -10,9 +10,13 @@ const useStyles = makeStyles((theme) => {
             padding: 24
         },
         fields:{
-            margin: 12,
+            margin: '12px 0px',
             display: 'block',
             padding: 16
+        },
+        dialoguePaper	:	{
+          borderRadius: 16,
+          minWidth: '70vw'
         }
     }
 })
@@ -37,7 +41,7 @@ export default function SimpleDialogDemo({openEditModal , setOpenEditModal , edi
 
   return (
     <div>
-      <Dialog onClose={handleClose} open={openEditModal}>
+      <Dialog classes={{paper: classes.dialoguePaper}} borderRadis={16} onClose={handleClose} open={openEditModal}>
       <form className={classes.editForm} onSubmit={handleSubmit}>
           <input className={classes.fields} type="text" defaultValue={editOrderValue.deliveredTo} onKeyUp={(e) => setEditOrderValue({...editOrderValue , deliveredTo : e.target.value})}/>
           <input className={classes.fields} type="text" defaultValue={editOrderValue.deliveredBy} onKeyUp={(e) => setEditOrderValue({...editOrderValue , deliveredBy : e.target.value})}/>

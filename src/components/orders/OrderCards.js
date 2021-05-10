@@ -12,6 +12,10 @@ const useStyles = makeStyles((theme) => {
         card: {
             padding: 18,
             borderRadius: 18,
+            width: '100%'
+        },
+        cardCol: {
+            display: 'flex'
         },
         cardContent:{
             marginBottom: 8
@@ -54,7 +58,7 @@ const useStyles = makeStyles((theme) => {
             color: `white`,
             textAlign: 'center'
 
-        }
+        },
     }
 })
 
@@ -73,7 +77,7 @@ export default function UserCards({filteredOrders , handleDelete , handleEdit}) 
                     if(order.isActive){
                         return(
                         
-                            <Grid key={order._id} item xs={12} sm={6} md={4}>
+                            <Grid className={classes.cardCol} key={order._id} item xs={12} sm={6} md={4}>
                                 <Card className={classes.card} elevation={5}>
                                     <CardHeader 
                                             title={
