@@ -5,52 +5,38 @@ import {makeStyles, Container, BottomNavigation, Typography, Drawer, List, ListI
 import {ListItemIcon} from '@material-ui/core'
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import {menuItems} from '../constants/Constants'
+import styled from 'styled-components'
 
+const Footer = styled(BottomNavigation)`
+    background: #3f51b5;
+    color: #fff;
+    min-height: 30px;
+    padding: 8px 16px;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+`;
+const MainPage = styled.div`
+    width: 100%;
+    min-height: 100vh;
+    padding-top: 15px;
+`;
+const HamburgerMenuItems = styled(ListItem)`
+    width: 100%;
+    text-align: center;
+    border-bottom: solid 1px #cccc;
+    &:last-child {
+        border-bottom: none;
+    }
+`;
 
 const useStyles = makeStyles((theme) => {
     return{
       toolbar: theme.mixins.toolbar,
-      page: {
-          width: '100%',
-          minHeight: '100vh',
-          paddingTop: theme.spacing(5)
-          
-      },
-      drawer: {
-          width: '100%',
-          textAlign: 'center',
-          borderBottom: 'solid 1px #cccc',
-          '&:last-child': {
-            borderBottom: 'none'
-          }
-          
-      },
       drawerPaper:{
         width: '100%',
-      },
-      footer: {
-          background: '#3f51b5',
-          color: '#fff',
-          minHeight: 30,
-          padding: '8px 16px',
-          height: 'auto',
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          justifyContent: 'center'
-
-      },
-      footerText: {
-          color: '#fff',
-          padding: 0,
-          textAlign: 'center',
-          fontSize: 14
-      },
-      backButton: {
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        paddingTop: theme.spacing(3)
       },
 
     }
@@ -74,7 +60,7 @@ export default function Layout({children}) {
     return (
         <div>
             <Appbar openDrawer={openDrawer}/>
-            <Drawer className={classes.drawer} anchor="top" variant="persistent" open={open} elevation={0} classes={{paper: classes.drawerPaper}}>
+            <Drawer anchor="top" variant="persistent" open={open} elevation={0} classes={{paper: classes.drawerPaper}}>
                 <ListItem button  onClick={openDrawer}>
                     <ListItemIcon>
                         <ArrowBackIcon/>
@@ -84,9 +70,9 @@ export default function Layout({children}) {
                     {menuItems.map(item => {
                         return(
                             <>
-                                <ListItem className={classes.drawer}  button key={item.title} onClick={() => drawerLink(item.path) }>
+                                <HamburgerMenuItems  button key={item.title} onClick={() => drawerLink(item.path) }>
                                     <ListItemText primary={item.title} />
-                                </ListItem>
+                                </HamburgerMenuItems>
                             </>
                         )
                     })}
@@ -95,14 +81,14 @@ export default function Layout({children}) {
 
             <Container>
                 <div className={classes.toolbar}></div>
-                <div className={classes.page}>
+                <MainPage>
                     {children}
-                </div>
+                </MainPage>
             </Container>
             <br/>
-            <BottomNavigation className={classes.footer}>
-                <Typography className={classes.footerText}>&copy;2021, pakourier.pk</Typography>
-            </BottomNavigation>
+            <Footer>
+                <Typography>&copy;2021, CourierServices.com</Typography>
+            </Footer>
         </div>
     )
 }
