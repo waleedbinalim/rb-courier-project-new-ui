@@ -1,37 +1,30 @@
-import React, {useState, useEffect , useContext} from 'react'
+import React, { useEffect , useContext} from 'react'
 import UserCards from '../components/users/UserCards'
 import UserEditDialogue from '../components/users/UserEditDialogue'
 import { Grid, Typography, TextField } from '@material-ui/core'
-import { makeStyles } from '@material-ui/core'
 import {headers , api} from '../api/Api'
 import {UserContext} from '../state/users/UserContext'
+import styled from 'styled-components'
 
-const useStyles = makeStyles((theme) => {
-    return{
-        searchField: {
-            marginTop: theme.spacing(1.5),
-            background: 'white',
-            overflow: 'hidden',
-            borderRadius: theme.spacing(1.5)
-        },
-        text: {
-            color: '#fff',
-            fontWeight: '600',
-            textAlign: 'center',
-            marginBottom: 8,
-            '@media(maxWidth: 991px)' : {
-               fontSize: 240
-             },
-        },
-        userPageImage:{
-            width: '100%'
-        },
-
+const SearchBar = styled(TextField)`
+    margin-top: 5px;
+    background: white;
+    overflow: hidden;
+    border-radius: 5px;
+`;
+const H3 = styled(Typography)`
+    font-weight: 600;
+    color: #fff;
+    text-align: center;
+    margin-bottom: 8px;
+    @media(maxWidth: 600px) {
+        font-size: 48px;
+        line-height: 56px;
     }
-})
+`;
+
 
 export default function Users() {
-    const classes = useStyles()
     const {filteredUsers, setFilteredUsers , users , setUsers , userSearch , setUserSearch,
         openEditModal , setOpenEditModal , editUserValue , setEditUserValue} = useContext(UserContext)
 
@@ -75,18 +68,15 @@ export default function Users() {
         <div>
             <UserEditDialogue/>
             <Grid container>
-                <Grid className={classes.userPageImage} item md={12}>
+                <Grid item md={12} sm={12} xs={12}>
                     <div className="users-image-wrapper">
-                    <div className={classes.ordersText}>
-                        <Typography variant="h3" className={classes.text}>Users</Typography>
-                        <TextField
-                            className={classes.searchField}
+                        <H3 variant="h3">Users</H3>
+                        <SearchBar
                             label="Search User"
                             variant="filled"
                             color="primary"
                             onKeyUp={(e) => {handleKeyPress(e)}}
                         />
-                    </div>
                     </div>
                 </Grid>
             </Grid>
