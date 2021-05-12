@@ -1,62 +1,45 @@
-import React, {useState , useEffect, useContext} from 'react'
+import React, {useEffect, useContext} from 'react'
 import {TextField, Typography} from '@material-ui/core'
-import {makeStyles} from '@material-ui/core'
 import OrderCards from './orders/OrderCards'
 import OrderEditDialogue from './orders/OrderEditDialogue'
 import {headers , api} from '../api/Api'
 import {OrderContext} from '../state/orders/OrderContext'
+import styled from 'styled-components'
 
-
- let useStyles = makeStyles((theme) => {
-     return{    
-         searchField: {
-             marginTop: theme.spacing(1.5),
-             background: 'white',
-             overflow: 'hidden',
-             borderRadius: theme.spacing(1.5)
-         },
-         text: {
-             color: '#fff',
-             fontWeight: '600',
-             textAlign: 'center',
-             marginBottom: 8,
-             '@media(maxWidth: 991px)' : {
-                fontSize: 240
-              },
-            
-            },
-            ordersText:{
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-                justifyContent: 'center',
-                maxWidth: 580,
-                marginLeft: 'auto',
-                marginRight: 'auto',
-                padding: 20
-            },
-            ordersHeading:{
-                color: '#fff',
-                fontWeight: 600,
-                fontSize: 60,
-                lineHeight: '68px',
-                textAlign: 'center',
-                marginBottom: '8px',
-                [theme.breakpoints.down('sm')]: {
-                    fontSize: 48,
-                    lineHeight: '56px'
-                  },
-                [theme.breakpoints.down('xs')]: {
-                    fontSize: 36,
-                    lineHeight: '42px'
-                  },
-    
-            },
-     }
- })
+const SearchBar = styled(TextField)`
+    margin-top: 5px;
+    background: white;
+    overflow: hidden;
+    border-radius: 5px;
+`;
+const OrdersImageContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    max-width: 580px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 20px;
+    color: #fff;
+    text-align: center;
+`;
+const H3 = styled(Typography)`
+    font-weight: 600;
+    font-size: 60px;
+    line-height: 68px;
+    margin-bottom: 8px;
+    @media(maxWidth: 600px) {
+        font-size: 48px;
+        line-height: 56px;
+    }
+`;
+const Paragraph = styled(Typography)`
+    font-weight: 600;
+    margin-bottom: 8px;
+`;
 
 export default function Orders() {
-    const classes = useStyles()
     const {filteredOrders , setFilteredOrders , orders , setOrders , orderSearch , setOrderSearch,
     openEditModal, setOpenEditModal , editOrderValue , setEditOrderValue} = useContext(OrderContext)
 
@@ -100,17 +83,20 @@ export default function Orders() {
         <div>
             <OrderEditDialogue/>
             <div className="orders-image-wrapper">
-            <div className={classes.ordersText}>
-                <Typography variant="h3" className={classes.ordersHeading}>Track Your Order</Typography>
-                <Typography variant="p" className={classes.text}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum ipsam ducimus cupiditate magni esse delectus repellat eveniet praesentium quasi veritatis? Quis hic dolor, reiciendis impedit nam id beatae voluptas ad, non, libero voluptate eos?</Typography>
-                <TextField
-                    className={classes.searchField}
+            <OrdersImageContainer>
+                <H3 variant="h3">Track Your Order</H3>
+                <Paragraph variant="p" >
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum ipsam ducimus 
+                    cupiditate magni esse delectus repellat eveniet praesentium quasi veritatis? Quis 
+                    hic dolor, reiciendis impedit nam id beatae voluptas ad, non, libero voluptate eos?
+                </Paragraph>
+                <SearchBar
                     label="Enter Id"
                     variant="filled"
                     color="primary"
                     onKeyUp={(e) => {handleKeyPress(e)}}
                 />
-            </div>
+            </OrdersImageContainer>
             </div>
             <OrderCards filteredOrders={filteredOrders} handleDelete={handleDelete} handleEdit={handleEdit}/>
         </div>
