@@ -2,11 +2,7 @@ import React, {useState} from 'react'
 import { TextField, Button } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core'
 import { useHistory } from "react-router-dom";
-import axios from 'axios'
-
-const api = axios.create({ baseURL: 'http://localhost:5000/'})
-
-let headers = {'Content-Type': 'application/json;charset=UTF-8',"Access-Control-Allow-Origin": "*"}
+import {headers ,api} from '../../api/Api'
 
 let useStyles = makeStyles((theme) => {
     return{
@@ -32,12 +28,10 @@ export default function OrderForm() {
 
     let handleSubmit = async (e) => {
         e.preventDefault();
-        console.log(inputField)
         if(inputField.deliveredTo && inputField.deliveredBy){
             let data = JSON.stringify(inputField)
             await api.post('/orders/add', data , {headers: headers})
             let addedUser = await api.get('orders/all')
-            console.log(addedUser.data)
             history.push('/orders')
         }
     }

@@ -3,6 +3,7 @@ import {AppBar , Toolbar, Avatar} from '@material-ui/core'
 import {List , ListItem , ListItemText , IconButton} from '@material-ui/core'
 import MenuIcon from '@material-ui/icons/Menu';
 import {makeStyles} from '@material-ui/core'
+import {navLinks} from '../constants/Constants'
 
 let useStyles = makeStyles((theme) => {
     return{
@@ -43,14 +44,6 @@ let useStyles = makeStyles((theme) => {
         }
     }
 })
-
-const navLinks = [
-    {title: 'Home' , path: '/'},
-    {title: 'Users' , path: '/users'},
-    {title: 'Orders' , path: '/orders'},
-    {title: 'FAQ\'s' , path: '/about'},
-    {title: 'Contact' , path: '/contact'},
-]
 
 export default function Appbar({openDrawer}) {
 

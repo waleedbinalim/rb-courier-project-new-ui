@@ -1,6 +1,7 @@
 import React from 'react'
 import { TextField, Button } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core'
+import {contactInputs} from '../constants/Constants'
 
 let useStyles = makeStyles((theme) => {
     return{
@@ -25,9 +26,13 @@ export default function UserForm() {
     return (
         <div className="form-card">
                 <form noValidate autoComplete="off">
-                    <TextField className={classes.field} label="First Name" variant="outlined" color="secondary" fullWidth required />
-                    <TextField className={classes.field} label="Last Name" variant="outlined" color="secondary" fullWidth required />
-                    <TextField className={classes.field} label="Email" variant="outlined" color="secondary" fullWidth required />
+                    {
+                        contactInputs.map(input => {
+                            return(
+                                <TextField className={classes.field} key={input.label} label={input.label} variant="outlined" color="secondary" fullWidth required />
+                            )
+                        })
+                    }
                     <TextField className={classes.field} label="Message" multiline rows={6} variant="outlined" color="secondary" fullWidth required />
                     <Button className={classes.button} variant="contained" color="secondary" >SUBMIT</Button>
                 </form>

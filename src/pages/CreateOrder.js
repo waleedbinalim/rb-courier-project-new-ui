@@ -1,22 +1,17 @@
 import React from 'react'
-import OrderForm from '../components/OrderForm'
-import { Typography, makeStyles } from '@material-ui/core'
+import OrderForm from '../components/orders/OrderForm'
+import { Typography } from '@material-ui/core'
+import styled from 'styled-components'
 
-let useStyles = makeStyles((theme) => {
-    return{
-        text:{
-            color: '#5b5b5bff',
-            fontWeight: 600
-        }
-
-    }
-})
+const Heading = styled(Typography)`
+    color: #5b5b5bff;
+    font-weight: 600;
+`;
 
 export default function CreateOrder() {
-    const classes = useStyles()
     return (
         <div className="form--inner">
-            <Typography variant="h3" className={classes.text}>Create Order</Typography>
+            <Heading variant="h3" >Create Order</Heading>
             <OrderForm/>
         </div>
     )

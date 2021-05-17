@@ -1,11 +1,9 @@
-import React from "react";
+import React , {useContext} from "react";
 import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
 import {makeStyles} from "@material-ui/core";
-import axios from 'axios'
-
-let headers = { 'Content-Type': 'application/json;charset=UTF-8', "Access-Control-Allow-Origin": "*"}
-const api = axios.create({baseURL: 'http://localhost:5000/'})
+import {headers ,api} from '../../api/Api'
+import {OrderContext} from '../../state/orders/OrderContext'
 
 const useStyles = makeStyles((theme) => {
     return{
@@ -13,14 +11,19 @@ const useStyles = makeStyles((theme) => {
             padding: 24
         },
         fields:{
-            margin: 12,
+            margin: '12px 0px',
             display: 'block',
             padding: 16
+        },
+        dialoguePaper	:	{
+          borderRadius: 16,
+          minWidth: '70vw'
         }
     }
 })
 
-export default function SimpleDialogDemo({openEditModal , setOpenEditModal , editOrderValue , setEditOrderValue , setOrders , setFilteredOrders}) {
+export default function SimpleDialogDemo( ) {
+    const {setFilteredOrders , setOrders , openEditModal, setOpenEditModal , editOrderValue , setEditOrderValue} = useContext(OrderContext)
     const classes = useStyles();
     const handleClose = () => {
         setOpenEditModal(false);
@@ -28,7 +31,6 @@ export default function SimpleDialogDemo({openEditModal , setOpenEditModal , edi
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-        console.log(editOrderValue)
         let url = '/orders/' + editOrderValue._id
         let data = JSON.stringify(editOrderValue)
         await api.put( url , data , {headers: headers})
@@ -41,7 +43,7 @@ export default function SimpleDialogDemo({openEditModal , setOpenEditModal , edi
 
   return (
     <div>
-      <Dialog onClose={handleClose} open={openEditModal}>
+      <Dialog classes={{paper: classes.dialoguePaper}} borderRadis={16} onClose={handleClose} open={openEditModal}>
       <form className={classes.editForm} onSubmit={handleSubmit}>
           <input className={classes.fields} type="text" defaultValue={editOrderValue.deliveredTo} onKeyUp={(e) => setEditOrderValue({...editOrderValue , deliveredTo : e.target.value})}/>
           <input className={classes.fields} type="text" defaultValue={editOrderValue.deliveredBy} onKeyUp={(e) => setEditOrderValue({...editOrderValue , deliveredBy : e.target.value})}/>

@@ -1,11 +1,9 @@
-import React from "react";
+import React, {useContext} from "react";
 import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
 import {makeStyles} from "@material-ui/core";
-import axios from 'axios'
-
-let headers = { 'Content-Type': 'application/json;charset=UTF-8', "Access-Control-Allow-Origin": "*"}
-const api = axios.create({baseURL: 'http://localhost:5000/'})
+import {headers ,api} from '../../api/Api'
+import {UserContext} from '../../state/users/UserContext'
 
 const useStyles = makeStyles((theme) => {
     return{
@@ -13,22 +11,24 @@ const useStyles = makeStyles((theme) => {
             padding: 24
         },
         fields:{
-            margin: 12,
+            margin: '12px 0px',
             display: 'block',
             padding: 16
-        }
+        },
     }
 })
 
-export default function SimpleDialogDemo({openEditModal , setOpenEditModal , editUserValue , setEditUserValue , setUsers , setFilteredUsers}) {
+export default function SimpleDialogDemo() {
+    const {setFilteredUsers , setUsers, openEditModal , setOpenEditModal , editUserValue , setEditUserValue} = useContext(UserContext)
     const classes = useStyles();
+
+    
     const handleClose = () => {
         setOpenEditModal(false);
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-        console.log(editUserValue)
         let url = '/users/' + editUserValue._id
         let data = JSON.stringify(editUserValue)
         await api.put( url , data , {headers: headers})
