@@ -3,6 +3,8 @@ import { Card, CardHeader, CardContent, Typography, Grid, CardActions, Button, A
 import { blue } from '@material-ui/core/colors'
 import { makeStyles } from '@material-ui/core'
 import {UserContext} from '../../state/users/UserContext'
+import UserCardButtons from './UserCardButtons'
+import UserCardContents from './UserCardContents'
 
 
 const useStyles = makeStyles((theme) => {
@@ -56,38 +58,15 @@ export default function UserCards({handleDelete, handleEdit}) {
                                             title={<Typography variant="h6">{user.name}</Typography>}
                                             subheader={user.email}
                                         />
-                
-                                        <CardContent>
-                                            <Typography className={classes.cardContent}><strong>City:</strong> {user.city}</Typography>
-                                            <Typography className={classes.cardContent}><strong>Address:</strong> {user.address}</Typography>
-                                            <Typography><strong>Phone:</strong> {user.phone}</Typography>
-                                            <Typography><strong>Is Active:</strong> {user.isActive ? 'Yes' : 'No'}</Typography>
-                                        </CardContent>
-    
-                                        <CardActions>
-                                            <Button 
-                                                id={user._id} 
-                                                variant="contained" size="small" color="primary" 
-                                                onClick={(e) => {handleEdit(e)}}
-                                            >
-                                            EDIT
-                                            </Button>
-                                            <Button 
-                                                id={user._id} 
-                                                variant="contained" 
-                                                size="small" 
-                                                color="secondary" 
-                                                onClick={(e) => {handleDelete(e)}}
-                                            >
-                                            DELETE
-                                            </Button>
-                                        </CardActions>
+
+                                        <UserCardContents user={user} classes={classes} />
+
+                                        <UserCardButtons user={user} handleDelete={handleDelete} handleEdit={handleEdit}/>
+
                                     </Card>
                                 </Grid>
-    
                             )
                         }
-
                     })
                 }
             </Grid>
