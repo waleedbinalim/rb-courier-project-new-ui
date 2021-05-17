@@ -5,6 +5,7 @@ import OrderEditDialogue from './orders/OrderEditDialogue'
 import {headers , api} from '../api/Api'
 import {OrderContext} from '../state/orders/OrderContext'
 import styled from 'styled-components'
+import {allOrders} from '../constants/Constants'
 
 const SearchBar = styled(TextField)`
     margin-top: 5px;
@@ -45,7 +46,7 @@ export default function Orders() {
 
 
     useEffect(() => {
-        fetch('http://localhost:5000/orders/all')
+        fetch(allOrders)
         .then(res => res.json())
         .then(data => {
             setOrders(data)
@@ -73,7 +74,6 @@ export default function Orders() {
     }
 
     let handleEdit= async (e) => {
-        console.log(e.currentTarget.id)
         let orderToEdit = await api.get('/orders/' + e.currentTarget.id)
         setEditOrderValue(orderToEdit.data);
         setOpenEditModal(true)

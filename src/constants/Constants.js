@@ -21,3 +21,6 @@ export const menuItems = [
     {title: 'LOGIN' , path: '/'},
     {title: 'SIGN UP' , path: '/'},
 ]
+
+export const allOrders = 'http://localhost:5000/orders/all'
+export const allUsers = 'http://localhost:5000/users/all'

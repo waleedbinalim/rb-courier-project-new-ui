@@ -5,6 +5,7 @@ import { Grid, Typography, TextField } from '@material-ui/core'
 import {headers , api} from '../api/Api'
 import {UserContext} from '../state/users/UserContext'
 import styled from 'styled-components'
+import {allUsers} from '../constants/Constants'
 
 const SearchBar = styled(TextField)`
     margin-top: 5px;
@@ -29,7 +30,7 @@ export default function Users() {
         openEditModal , setOpenEditModal , editUserValue , setEditUserValue} = useContext(UserContext)
 
     useEffect( ()=> {
-        fetch('http://localhost:5000/users/all')
+        fetch(allUsers)
         .then(res => res.json())
         .then(data => {
             setUsers(data)
