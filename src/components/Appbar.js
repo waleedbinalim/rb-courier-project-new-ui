@@ -70,12 +70,12 @@ export default function Appbar({openDrawer}) {
                             })}
                         </List >
                             <List className={classes.auth}>
-                                        <div className={classes.linkText}>
+                                        <a href="/login" className={classes.linkText}>
                                             <ListItem button>
                                                 <ListItemText primary="Login"  />
                                             </ListItem>
-                                        </div>
-                                        <a href="#" className={classes.linkText}>
+                                        </a>
+                                        <a href="/signup" className={classes.linkText}>
                                             <ListItem button>
                                                 <ListItemText primary="Sign Up"  />
                                             </ListItem>

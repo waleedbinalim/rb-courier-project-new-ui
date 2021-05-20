@@ -127,3 +127,9 @@ img{
   width: 100%;
   height: 100%;
 }
+
+.auth{
+  text-decoration: none;
+  list-style-type: none;
+  color: #fff;
+}
