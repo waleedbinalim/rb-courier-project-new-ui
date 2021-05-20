@@ -1,5 +1,5 @@
 import React, {useContext} from 'react'
-import { Card, CardHeader, CardContent, Typography, Grid, CardActions, Button, Avatar } from '@material-ui/core'
+import { Card, CardHeader, Typography, Grid, Button, Avatar } from '@material-ui/core'
 import { blue } from '@material-ui/core/colors'
 import { makeStyles } from '@material-ui/core'
 import {UserContext} from '../../state/users/UserContext'
