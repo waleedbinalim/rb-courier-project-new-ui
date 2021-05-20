@@ -6,6 +6,8 @@ import Orders from './components/Orders'
 import Contact from './pages/Contact'
 import CreateUser from './pages/CreateUser'
 import CreateOrder from './pages/CreateOrder'
+import Signup from './pages/Signup'
+import Login from './pages/Login'
 import Layout from './components/Layout'
 import UserContextProvider from './state/users/UserContext'
 import OrderContextProvider from './state/orders/OrderContext'
@@ -28,6 +30,8 @@ function App() {
             <Route exact path='/contact' component={Contact} />
             <Route exact path='/create/user' component={CreateUser} />
             <Route exact path='/create/order' component={CreateOrder} />
+            <Route exact path="/signup" component={Signup}/>
+            <Route exact path="/login" component={Login}/>
           </Layout>
         </BrowserRouter>
     </div>

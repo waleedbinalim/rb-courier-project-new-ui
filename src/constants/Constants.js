@@ -18,8 +18,8 @@ export const menuItems = [
     {title: 'ORDERS' , path: '/orders'},
     {title: 'ABOUT' , path: '/about'},
     {title: 'CONTACT' , path: '/contact'},
-    {title: 'LOGIN' , path: '/'},
-    {title: 'SIGN UP' , path: '/'},
+    {title: 'LOGIN' , path: '/login'},
+    {title: 'SIGN UP' , path: '/signup'},
 ]
 
 export const allOrders = 'http://localhost:5000/orders/all'
