@@ -24,3 +24,10 @@ export const menuItems = [
 
 export const allOrders = 'http://localhost:5000/orders/all'
 export const allUsers = 'http://localhost:5000/users/all'
+export const logout = 'http://localhost:5000/logout'
+
+export const statusCodes = {
+    forbidden: 403,
+    notFound: 404,
+    ok: 200
+}
