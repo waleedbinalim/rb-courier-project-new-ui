@@ -1,11 +1,12 @@
 import React, {useEffect, useContext} from 'react'
+import { useHistory } from "react-router-dom";
 import {TextField, Typography} from '@material-ui/core'
 import OrderCards from './orders/OrderCards'
 import OrderEditDialogue from './orders/OrderEditDialogue'
 import {headers , api} from '../api/Api'
 import {OrderContext} from '../state/orders/OrderContext'
 import styled from 'styled-components'
-import {allOrders} from '../constants/Constants'
+import {allOrders , statusCodes} from '../constants/Constants'
 
 const SearchBar = styled(TextField)`
     margin-top: 5px;
@@ -41,29 +42,27 @@ const Paragraph = styled(Typography)`
 `;
 
 export default function Orders() {
+    const history = useHistory();
+
     const {filteredOrders , setFilteredOrders , orders , setOrders , orderSearch , setOrderSearch,
     openEditModal, setOpenEditModal , editOrderValue , setEditOrderValue} = useContext(OrderContext)
 
 
-    useEffect(() => {
-        fetch(allOrders)
-        .then(res => res.json())
-        .then(data => {
-            setOrders(data)
-            setFilteredOrders(data)
-        })
+    useEffect( async () => {
+        const orderData = await fetch(allOrders, {credentials: 'include'})
+        if(orderData.status == statusCodes.forbidden){history.push('/login')}
+        const responseData = await orderData.json()
+        setOrders(responseData)
+        setFilteredOrders(responseData)
     },[])
 
     useEffect( ()=> {
-        let filter = orders.filter(order => {
+        let filter = orders?.filter(order => {
             return order._id.toLowerCase().includes(orderSearch.toLowerCase())   
         })
         setFilteredOrders(filter)
     },[orderSearch])
 
-    let handleKeyPress= (e) => {
-        setOrderSearch(e.target.value)
-    }
 
     let handleDelete= async (e) => {
         const deleteURL = `/orders/${e.currentTarget.id}` ;
@@ -94,7 +93,7 @@ export default function Orders() {
                     label="Enter Id"
                     variant="filled"
                     color="primary"
-                    onKeyUp={(e) => {handleKeyPress(e)}}
+                    onKeyUp={(e) => {setOrderSearch(e.target.value)}}
                 />
             </OrdersImageContainer>
             </div>
