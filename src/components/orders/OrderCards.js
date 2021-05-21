@@ -75,7 +75,7 @@ export default function UserCards({handleDelete , handleEdit}) {
                 </a>
             </Grid>
             <Grid className={classes.cardContainer} container spacing={3}>
-                {filteredOrders.map(order => {
+                {filteredOrders?.map(order => {
                     if(order.isActive){
                         return(
                         

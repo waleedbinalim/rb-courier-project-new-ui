@@ -1,11 +1,12 @@
 import React, { useEffect , useContext} from 'react'
+import { useHistory } from "react-router-dom";
 import UserCards from '../components/users/UserCards'
 import UserEditDialogue from '../components/users/UserEditDialogue'
 import { Grid, Typography, TextField } from '@material-ui/core'
 import {headers , api} from '../api/Api'
 import {UserContext} from '../state/users/UserContext'
 import styled from 'styled-components'
-import {allUsers} from '../constants/Constants'
+import {allUsers , statusCodes} from '../constants/Constants'
 
 const SearchBar = styled(TextField)`
     margin-top: 5px;
@@ -26,16 +27,16 @@ const H3 = styled(Typography)`
 
 
 export default function Users() {
+    const history = useHistory();
     const {filteredUsers, setFilteredUsers , users , setUsers , userSearch , setUserSearch,
         openEditModal , setOpenEditModal , editUserValue , setEditUserValue} = useContext(UserContext)
 
-    useEffect( ()=> {
-        fetch(allUsers)
-        .then(res => res.json())
-        .then(data => {
-            setUsers(data)
-            setFilteredUsers(data)
-        })
+    useEffect( async ()=> {
+        const userData = await fetch(allUsers, {credentials: 'include'});
+        if(userData.status == statusCodes.forbidden){history.push('/login')}
+        const responseData = await userData.json();
+        setUsers(responseData)
+        setFilteredUsers(responseData)
     },[])
 
     useEffect( ()=> {
@@ -44,10 +45,6 @@ export default function Users() {
         })
         setFilteredUsers(filter)
     },[userSearch])
-
-    let handleKeyPress= (e) => {
-        setUserSearch(e.target.value)
-    }
 
     let handleDelete= async (e) => {
         let deleteURL = `/users/${e.currentTarget.id}`;
@@ -76,7 +73,7 @@ export default function Users() {
                             label="Search User"
                             variant="filled"
                             color="primary"
-                            onKeyUp={(e) => {handleKeyPress(e)}}
+                            onKeyUp={(e) => {setUserSearch(e.target.value)}}
                         />
                     </div>
                 </Grid>

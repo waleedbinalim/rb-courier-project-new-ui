@@ -1,4 +1,5 @@
 import React, {useState} from 'react'
+import { useHistory } from "react-router-dom";
 import { Typography , TextField , Button} from '@material-ui/core'
 import styled from 'styled-components'
 
@@ -12,6 +13,8 @@ const Inputs = styled(TextField)`
 
 export default function Signup() {
 
+    const history = useHistory();
+
     const [auth, setAuth] = useState({ email: '', password: '' });
 
     const handleSubmit = async (e) => {
@@ -24,6 +27,7 @@ export default function Signup() {
                     body: data,
                     headers: {'Content-Type': 'application/json'}
                 })
+                history.goBack()
             } 
             catch (err) {
                 console.log(err);
@@ -45,4 +49,4 @@ export default function Signup() {
     )
 }
 
-// ,,,
+// ,,,,,
