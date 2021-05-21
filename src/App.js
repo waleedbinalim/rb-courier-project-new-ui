@@ -11,28 +11,31 @@ import Login from './pages/Login'
 import Layout from './components/Layout'
 import UserContextProvider from './state/users/UserContext'
 import OrderContextProvider from './state/orders/OrderContext'
+import AuthContextProvider from './state/auth/AuthContext'
 
 
 function App() {
   return (
     <div className="App">
         <BrowserRouter>
-          <Layout>
-            <Route exact path='/' component={Home} />
-            <Route exact path='/about' component={About} />
+          <AuthContextProvider>
+            <Layout>
+              <Route exact path='/' component={Home} />
+              <Route exact path='/about' component={About} />
 
-            <UserContextProvider>
-              <Route exact path='/users' component={Users} />
-            </UserContextProvider>
-            <OrderContextProvider>
-              <Route exact path='/orders' component={Orders} />
-            </OrderContextProvider>
-            <Route exact path='/contact' component={Contact} />
-            <Route exact path='/create/user' component={CreateUser} />
-            <Route exact path='/create/order' component={CreateOrder} />
-            <Route exact path="/signup" component={Signup}/>
-            <Route exact path="/login" component={Login}/>
-          </Layout>
+              <UserContextProvider>
+                <Route exact path='/users' component={Users} />
+              </UserContextProvider>
+              <OrderContextProvider>
+                <Route exact path='/orders' component={Orders} />
+              </OrderContextProvider>
+              <Route exact path='/contact' component={Contact} />
+              <Route exact path='/create/user' component={CreateUser} />
+              <Route exact path='/create/order' component={CreateOrder} />
+              <Route exact path="/signup" component={Signup}/>
+              <Route exact path="/login" component={Login}/>
+            </Layout>
+            </AuthContextProvider>
         </BrowserRouter>
     </div>
   );
