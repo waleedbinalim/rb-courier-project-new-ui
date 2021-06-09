@@ -1,12 +1,13 @@
-import React, {useEffect, useContext} from 'react'
-import { useHistory } from "react-router-dom";
-import {TextField, Typography} from '@material-ui/core'
+import React, { useContext } from 'react'
+import { TextField, Typography } from '@material-ui/core'
 import OrderCards from './orders/OrderCards'
 import OrderEditDialogue from './orders/OrderEditDialogue'
-import {headers , api} from '../api/Api'
-import {OrderContext} from '../state/orders/OrderContext'
+import { headers, api } from '../utils/api/Api'
+import { OrderContext } from '../state/orders/OrderContext'
 import styled from 'styled-components'
-import {allOrders , statusCodes} from '../constants/Constants'
+import { allOrders } from '../constants/Constants'
+import useFetchHook from '../utils/useFetchHook';
+import useSearchHook from '../utils/useSearchHook'
 
 const SearchBar = styled(TextField)`
     margin-top: 5px;
@@ -42,37 +43,24 @@ const Paragraph = styled(Typography)`
 `;
 
 export default function Orders() {
-    const history = useHistory();
 
-    const {filteredOrders , setFilteredOrders , orders , setOrders , orderSearch , setOrderSearch,
-    openEditModal, setOpenEditModal , editOrderValue , setEditOrderValue} = useContext(OrderContext)
+    const {
+        setOpenEditModal,
+        setEditOrderValue
+    } = useContext(OrderContext)
 
+    const { data: orders, setData: setOrders, filteredData: filteredOrders, setFilteredData: setFilteredOrders } = useFetchHook(allOrders);
+    const { setSearch: setOrderSearch } = useSearchHook(orders, filteredOrders, setFilteredOrders)
 
-    useEffect( async () => {
-        const orderData = await fetch(allOrders, {credentials: 'include'})
-        if(orderData.status == statusCodes.forbidden){history.push('/login')}
-        const responseData = await orderData.json()
-        setOrders(responseData)
-        setFilteredOrders(responseData)
-    },[])
-
-    useEffect( ()=> {
-        let filter = orders?.filter(order => {
-            return order._id.toLowerCase().includes(orderSearch.toLowerCase())   
-        })
-        setFilteredOrders(filter)
-    },[orderSearch])
-
-
-    let handleDelete= async (e) => {
-        const deleteURL = `/orders/${e.currentTarget.id}` ;
-        await api.put(deleteURL, {isActive: false} , {headers: headers})
-        let updatedOrders = await api.get('/orders/all')
-        setFilteredOrders(updatedOrders.data)
-        setOrders(updatedOrders.data)
+    let handleDelete = async (e) => {
+        const deleteURL = `/orders/${e.currentTarget.id}`;
+        await api.put(deleteURL, { isActive: false }, { headers: headers })
+        // let updatedOrders = await api.get('/orders/all')
+        // setFilteredOrders(updatedOrders.data)
+        // setOrders(updatedOrders.data)
     }
 
-    let handleEdit= async (e) => {
+    let handleEdit = async (e) => {
         let orderToEdit = await api.get('/orders/' + e.currentTarget.id)
         setEditOrderValue(orderToEdit.data);
         setOpenEditModal(true)
@@ -80,24 +68,24 @@ export default function Orders() {
 
     return (
         <div>
-            <OrderEditDialogue/>
+            <OrderEditDialogue setOrders={setOrders} setFilteredOrders={setFilteredOrders} />
             <div className="orders-image-wrapper">
-            <OrdersImageContainer>
-                <H3 variant="h3">Track Your Order</H3>
-                <Paragraph variant="p" >
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum ipsam ducimus 
-                    cupiditate magni esse delectus repellat eveniet praesentium quasi veritatis? Quis 
-                    hic dolor, reiciendis impedit nam id beatae voluptas ad, non, libero voluptate eos?
+                <OrdersImageContainer>
+                    <H3 variant="h3">Track Your Order</H3>
+                    <Paragraph variant="p" >
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum ipsam ducimus
+                        cupiditate magni esse delectus repellat eveniet praesentium quasi veritatis? Quis
+                        hic dolor, reiciendis impedit nam id beatae voluptas ad, non, libero voluptate eos?
                 </Paragraph>
-                <SearchBar
-                    label="Enter Id"
-                    variant="filled"
-                    color="primary"
-                    onKeyUp={(e) => {setOrderSearch(e.target.value)}}
-                />
-            </OrdersImageContainer>
+                    <SearchBar
+                        label="Enter Id"
+                        variant="filled"
+                        color="primary"
+                        onKeyUp={(e) => { setOrderSearch(e.target.value) }}
+                    />
+                </OrdersImageContainer>
             </div>
-            <OrderCards filteredOrders={filteredOrders} handleDelete={handleDelete} handleEdit={handleEdit}/>
+            <OrderCards filteredOrders={filteredOrders} handleDelete={handleDelete} handleEdit={handleEdit} />
         </div>
     )
 }
