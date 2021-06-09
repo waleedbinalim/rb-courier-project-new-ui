@@ -1,10 +1,10 @@
-import React , {useContext} from 'react'
+import React, { useContext } from 'react'
 import { Card, CardHeader, CardContent, Typography, Grid, CardActions, Button } from '@material-ui/core'
-import {makeStyles } from '@material-ui/core'
-import {OrderContext} from '../../state/orders/OrderContext'
+import { makeStyles } from '@material-ui/core'
+import { OrderContext } from '../../state/orders/OrderContext'
 
 const useStyles = makeStyles((theme) => {
-    return{
+    return {
         cardContainer: {
             paddingTop: theme.spacing(2),
             paddingLeft: theme.spacing(3),
@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme) => {
         cardCol: {
             display: 'flex'
         },
-        cardContent:{
+        cardContent: {
             marginBottom: 8
         },
         spanTag: {
@@ -34,7 +34,7 @@ const useStyles = makeStyles((theme) => {
             fontSize: 12,
             [theme.breakpoints.down('md')]: {
                 marginTop: 16
-              },
+            },
         },
         spanDiv: {
             display: 'flex',
@@ -43,7 +43,7 @@ const useStyles = makeStyles((theme) => {
             [theme.breakpoints.down('md')]: {
                 flexDirection: 'column',
                 alignItems: 'flex-start'
-              },
+            },
         },
         spanId: {
             fontSize: 12,
@@ -64,48 +64,48 @@ const useStyles = makeStyles((theme) => {
 })
 
 
-export default function UserCards({handleDelete , handleEdit}) {
-    const {filteredOrders} = useContext(OrderContext)
+export default function UserCards({ handleDelete, handleEdit, filteredOrders }) {
+    // const {filteredOrders} = useContext(OrderContext)
     const classes = useStyles()
     return (
         <div>
             <Grid align="center" item xs={12} sm={12} md={12}>
                 <a className={classes.linkText} href="/create/order">
-                    <Button variant="contained" size="large" color="secondary">Create Order</Button>    
+                    <Button variant="contained" size="large" color="secondary">Create Order</Button>
                 </a>
             </Grid>
             <Grid className={classes.cardContainer} container spacing={3}>
                 {filteredOrders?.map(order => {
-                    if(order.isActive){
-                        return(
-                        
+                    if (order.isActive) {
+                        return (
+
                             <Grid className={classes.cardCol} key={order._id} item xs={12} sm={6} md={4}>
                                 <Card className={classes.card} elevation={5}>
-                                    <CardHeader 
-                                            title={
-                                                <div className={classes.spanDiv}>
-                                                    <span className={classes.spanId}>ID: {order._id}</span>
-                                                    <span className={classes.spanTag}>{order.status}</span>
-                                                </div>
-                                            }
-                                        />
-            
+                                    <CardHeader
+                                        title={
+                                            <div className={classes.spanDiv}>
+                                                <span className={classes.spanId}>ID: {order._id}</span>
+                                                <span className={classes.spanTag}>{order.status}</span>
+                                            </div>
+                                        }
+                                    />
+
                                     <CardContent>
                                         <Typography className={classes.cardContent}><strong>Delivery To:</strong> {order.deliveredTo}</Typography>
                                         <Typography className={classes.cardContent}><strong>Delivery By:</strong> {order.deliveredBy}</Typography>
                                         <Typography><strong>Is Active:</strong> {order.isActive ? 'Yes' : 'No'}</Typography>
                                     </CardContent>
-    
+
                                     <CardActions>
                                         <Button id={order._id} variant="contained" size="small" color="primary"
-                                            onClick={(e) => {handleEdit(e)}}
+                                            onClick={(e) => { handleEdit(e) }}
                                         >
-                                        EDIT
+                                            EDIT
                                         </Button>
                                         <Button id={order._id} variant="contained" size="small" color="secondary"
-                                            onClick={(e) => {handleDelete(e)}}
+                                            onClick={(e) => { handleDelete(e) }}
                                         >
-                                                DELETE
+                                            DELETE
                                         </Button>
                                     </CardActions>
                                 </Card>
